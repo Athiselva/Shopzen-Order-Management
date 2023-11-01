@@ -1,5 +1,7 @@
 package com.athi.shopzen.ordermanagement.implementer;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +23,11 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 
 	@Override
-	public Order addOrder(Order Order) {
-		return this.orderRepository.save(Order);
+	public Order addOrder(Order order) {
+		Timestamp currentTimestamp = new Timestamp(new Date().getTime());
+		order.setCreatedAt(currentTimestamp);
+		order.setModifiedAt(currentTimestamp);
+		return this.orderRepository.save(order);
 	}
 
 	@Override
@@ -41,8 +46,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order updateOrder(Order Order) {
-		return this.orderRepository.save(Order);
+	public Order updateOrder(Order order) {
+		return this.orderRepository.save(order);
 	}
 
 	@Override

@@ -20,17 +20,26 @@ import com.athi.shopzen.ordermanagement.service.PaymentService;
  *
  */
 @RestController
-@RequestMapping(value = "payment-management/api")
+@RequestMapping("payment-management/api")
 public class PaymentRestController {
 	
 	@Autowired
 	private PaymentService paymentService;
+	
+	/**
+	 * @param payment
+	 * @return
+	 */
+	@GetMapping(value = "/")
+	public String status() {
+		return "Success!";
+	}
 
 	/**
 	 * @param payment
 	 * @return
 	 */
-	@PostMapping(value = "/add")
+	@PostMapping(value = "/create")
 	public String addPayment(@RequestBody Payment payment) {
 		payment = this.paymentService.addPayment(payment);
 		return "Payment Added with Id : " + payment.getId();

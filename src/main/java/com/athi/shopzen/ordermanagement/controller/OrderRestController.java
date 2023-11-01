@@ -12,36 +12,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.athi.shopzen.ordermanagement.model.Payment;
-import com.athi.shopzen.ordermanagement.service.PaymentService;
+import com.athi.shopzen.ordermanagement.model.Order;
+import com.athi.shopzen.ordermanagement.service.OrderService;
 
 /**
  * @author athiselvam.n
  *
  */
 @RestController
-@RequestMapping(value = "order-management/api")
+@RequestMapping("/order-management/api")
 public class OrderRestController {
 
 	@Autowired
-	private PaymentService paymentService;
+	private OrderService orderService;
 
 	/**
-	 * @param payment
+	 * @param Order
 	 * @return
 	 */
 	@PostMapping(value = "/add")
-	public String addPayment(@RequestBody Payment payment) {
-		payment = this.paymentService.addPayment(payment);
-		return "Payment Added with Id : " + payment.getId();
+	public String addOrder(@RequestBody Order order) {
+		order = this.orderService.addOrder(order);
+		return "Order Added with Id : " + order.getId();
 	}
 
 	/**
 	 * @return
 	 */
 	@GetMapping(value = "/fetchall")
-	public List<Payment> fetchAllPayments() {
-		return this.paymentService.fetchAllPayments();
+	public List<Order> fetchAllOrders() {
+		return this.orderService.fetchAllOrders();
 	}
 
 	/**
@@ -49,17 +49,17 @@ public class OrderRestController {
 	 * @return
 	 */
 	@GetMapping(value = "/fetch/{id}")
-	public Payment fetchPaymentById(@PathVariable int id) {
-		return this.paymentService.fetchPaymentById(id);
+	public Order fetchOrderById(@PathVariable int id) {
+		return this.orderService.fetchOrderById(id);
 	}
 
 	/**
-	 * @param Payment
+	 * @param Order
 	 * @return
 	 */
 	@PutMapping(value = "/update")
-	public Payment updatePaymentById(@RequestBody Payment Payment) {
-		return this.paymentService.updatePayment(Payment);
+	public Order updateOrderById(@RequestBody Order order) {
+		return this.orderService.updateOrder(order);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class OrderRestController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delete/{id}")
-	public String deletePaymentById(@PathVariable int id) {
-		return this.paymentService.deletePaymentById(id);
+	public String deleteOrderById(@PathVariable int id) {
+		return this.orderService.deleteOrderById(id);
 	}
 }

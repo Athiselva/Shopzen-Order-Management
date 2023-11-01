@@ -1,5 +1,7 @@
 package com.athi.shopzen.ordermanagement.implementer;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +23,11 @@ public class PaymentServiceImpl implements PaymentService {
 	private PaymentRepository paymentRepository;
 
 	@Override
-	public Payment addPayment(Payment Payment) {
-		return this.paymentRepository.save(Payment);
+	public Payment addPayment(Payment payment) {
+		Timestamp currentTimestamp = new Timestamp(new Date().getTime());
+		payment.setCreatedAt(currentTimestamp);
+		payment.setModifiedAt(currentTimestamp);
+		return this.paymentRepository.save(payment);
 	}
 
 	@Override
@@ -33,16 +38,16 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public Payment fetchPaymentById(int id) {
 		Optional<Payment> optionalPayment = this.paymentRepository.findById(id);
-		Payment Payment = null;
+		Payment payment = null;
 		if (optionalPayment.isPresent()) {
-			Payment = optionalPayment.get();
+			payment = optionalPayment.get();
 		}
-		return Payment;
+		return payment;
 	}
 
 	@Override
-	public Payment updatePayment(Payment Payment) {
-		return this.paymentRepository.save(Payment);
+	public Payment updatePayment(Payment payment) {
+		return this.paymentRepository.save(payment);
 	}
 
 	@Override
