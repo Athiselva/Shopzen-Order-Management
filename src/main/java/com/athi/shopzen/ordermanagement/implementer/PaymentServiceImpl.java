@@ -10,6 +10,10 @@ import com.athi.shopzen.ordermanagement.model.Payment;
 import com.athi.shopzen.ordermanagement.repository.PaymentRepository;
 import com.athi.shopzen.ordermanagement.service.PaymentService;
 
+/**
+ * @author athiselvam.n
+ *
+ */
 @Service
 public class PaymentServiceImpl implements PaymentService {
 

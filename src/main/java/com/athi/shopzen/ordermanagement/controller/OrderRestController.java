@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.athi.shopzen.ordermanagement.model.Payment;
 import com.athi.shopzen.ordermanagement.service.PaymentService;
 
+/**
+ * @author athiselvam.n
+ *
+ */
 @RestController
 @RequestMapping(value = "order-management/api")
 public class OrderRestController {
@@ -22,27 +26,46 @@ public class OrderRestController {
 	@Autowired
 	private PaymentService paymentService;
 
+	/**
+	 * @param payment
+	 * @return
+	 */
 	@PostMapping(value = "/add")
 	public String addPayment(@RequestBody Payment payment) {
 		payment = this.paymentService.addPayment(payment);
 		return "Payment Added with Id : " + payment.getId();
 	}
 
+	/**
+	 * @return
+	 */
 	@GetMapping(value = "/fetchall")
 	public List<Payment> fetchAllPayments() {
 		return this.paymentService.fetchAllPayments();
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = "/fetch/{id}")
 	public Payment fetchPaymentById(@PathVariable int id) {
 		return this.paymentService.fetchPaymentById(id);
 	}
 
+	/**
+	 * @param Payment
+	 * @return
+	 */
 	@PutMapping(value = "/update")
 	public Payment updatePaymentById(@RequestBody Payment Payment) {
 		return this.paymentService.updatePayment(Payment);
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(value = "/delete/{id}")
 	public String deletePaymentById(@PathVariable int id) {
 		return this.paymentService.deletePaymentById(id);
